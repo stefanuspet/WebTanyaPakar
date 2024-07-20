@@ -2,6 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { MdDashboardCustomize } from "react-icons/md";
 import { GrGallery } from "react-icons/gr";
+import { IoChatbubbleEllipses } from "react-icons/io5";
+import { FaUserGraduate } from "react-icons/fa";
+import { FaUserGroup } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa";
+import { PiNotebookLight } from "react-icons/pi";
+import { MdPictureAsPdf } from "react-icons/md";
 
 // eslint-disable-next-line react/prop-types
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
@@ -56,7 +62,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   return (
     <aside
       ref={sidebar}
-      className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0 ${
+      className={`absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-quaternary duration-300 ease-linear lg:static lg:translate-x-0 ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
@@ -106,7 +112,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               {/* <!-- Menu Item Calendar --> */}
               <li>
                 <NavLink
-                  to="/dashboard"
+                  to="/dashboard-admin"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes("calendar") &&
                     "bg-graydark dark:bg-meta-4"
@@ -121,13 +127,69 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               {/* <!-- Menu Item Tables --> */}
               <li>
                 <NavLink
-                  to="/dashboard/gallery"
+                  to="/dashboard-admin/"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes("tables") && "bg-graydark dark:bg-meta-4"
                   }`}
                 >
-                  <GrGallery />
-                  Galeri
+                  <IoChatbubbleEllipses />
+                  Chat
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard-admin/"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes("tables") && "bg-graydark dark:bg-meta-4"
+                  }`}
+                >
+                  <FaUserGraduate />
+                  Pakar
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard-admin/"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes("tables") && "bg-graydark dark:bg-meta-4"
+                  }`}
+                >
+                  <FaUserGroup />
+                  Tenant
+                </NavLink>
+              </li>
+              <li>
+                <li>
+                  <NavLink
+                    to="/dashboard-admin/"
+                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                      pathname.includes("tables") &&
+                      "bg-graydark dark:bg-meta-4"
+                    }`}
+                  >
+                    <PiNotebookLight />
+                    Log Tenant
+                  </NavLink>
+                </li>
+                <NavLink
+                  to="/dashboard-admin/"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes("tables") && "bg-graydark dark:bg-meta-4"
+                  }`}
+                >
+                  <FaUser />
+                  User
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard-admin/"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes("tables") && "bg-graydark dark:bg-meta-4"
+                  }`}
+                >
+                  <MdPictureAsPdf />
+                  Materi PDf
                 </NavLink>
               </li>
               {/* <!-- Menu Item Tables --> */}
