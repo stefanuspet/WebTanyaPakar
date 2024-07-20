@@ -5,14 +5,6 @@ export default {
     fontFamily: {
       satoshi: ["Satoshi", "sans-serif"],
     },
-    colors: {
-      primary: "#5CB823",
-      secondary: "#4D7D2F",
-      tertiary: "#045A5B",
-      quaternary: "#043A39",
-      white: "#FFFFFF",
-      black: "#000000",
-    },
     extend: {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
@@ -27,6 +19,12 @@ export default {
         // ...defaultTheme.screens,
       },
       colors: {
+        primary: "#5CB823",
+        secondary: "#4D7D2F",
+        tertiary: "#045A5B",
+        quaternary: "#043A39",
+        white: "#FFFFFF",
+        black: "#000000",
         current: "currentColor",
         transparent: "transparent",
         white: "#FFFFFF",

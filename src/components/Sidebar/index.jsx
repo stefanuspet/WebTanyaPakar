@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { MdDashboardCustomize } from "react-icons/md";
-import { GrGallery } from "react-icons/gr";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { FaUserGraduate } from "react-icons/fa";
 import { FaUserGroup } from "react-icons/fa6";
@@ -9,7 +8,6 @@ import { FaUser } from "react-icons/fa";
 import { PiNotebookLight } from "react-icons/pi";
 import { MdPictureAsPdf } from "react-icons/md";
 
-// eslint-disable-next-line react/prop-types
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
   const { pathname } = location;
@@ -22,7 +20,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
   );
 
-  // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }) => {
       if (!sidebar.current || !trigger.current) return;
@@ -39,7 +36,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     return () => document.removeEventListener("click", clickHandler);
   }, [sidebarOpen, setSidebarOpen]);
 
-  // close if the esc key is pressed
   useEffect(() => {
     const keyHandler = ({ keyCode }) => {
       if (!sidebarOpen || keyCode !== 27) return;
@@ -49,7 +45,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     return () => document.removeEventListener("keydown", keyHandler);
   });
 
-  // add/remove sidebar expanded class
   useEffect(() => {
     if (sidebarExpanded) {
       document.body.classList.add("sidebar-expanded");
@@ -66,10 +61,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
-      {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
         <NavLink to="/dashboard">
-          {/* <img src={Logo} alt="Logo" /> */}
           <h1 className="text-center text-2xl text-white font-extrabold">
             Tanya Pakar
           </h1>
@@ -97,19 +90,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </svg>
         </button>
       </div>
-      {/* <!-- SIDEBAR HEADER --> */}
 
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
-        {/* <!-- Sidebar Menu --> */}
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
-          {/* <!-- Menu Group --> */}
           <div>
             <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
               MENU
             </h3>
 
             <ul className="mb-6 flex flex-col gap-1.5">
-              {/* <!-- Menu Item Calendar --> */}
               <li>
                 <NavLink
                   to="/dashboard-admin"
@@ -122,9 +111,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   Dashboard
                 </NavLink>
               </li>
-              {/* <!-- Menu Item Calendar --> */}
-
-              {/* <!-- Menu Item Tables --> */}
               <li>
                 <NavLink
                   to="/dashboard-admin/"
@@ -159,20 +145,19 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 </NavLink>
               </li>
               <li>
-                <li>
-                  <NavLink
-                    to="/dashboard-admin/"
-                    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                      pathname.includes("tables") &&
-                      "bg-graydark dark:bg-meta-4"
-                    }`}
-                  >
-                    <PiNotebookLight />
-                    Log Tenant
-                  </NavLink>
-                </li>
                 <NavLink
                   to="/dashboard-admin/"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes("tables") && "bg-graydark dark:bg-meta-4"
+                  }`}
+                >
+                  <PiNotebookLight />
+                  Log Tenant
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard-admin/users"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes("tables") && "bg-graydark dark:bg-meta-4"
                   }`}
@@ -192,11 +177,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   Materi PDf
                 </NavLink>
               </li>
-              {/* <!-- Menu Item Tables --> */}
             </ul>
           </div>
         </nav>
-        {/* <!-- Sidebar Menu --> */}
       </div>
     </aside>
   );

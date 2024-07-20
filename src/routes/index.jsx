@@ -3,6 +3,7 @@ import Auth from "../pages/Auth";
 import ErrorPage from "../pages/ErrorPage";
 // import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "../pages/admin/Dashboard";
+import Users from "../pages/admin/Users";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       <Dashboard />
       // </ProtectedRoute>
     ),
+  },
+  {
+    path: "dashboard-admin/users",
+    element: <Users />,
   },
 ]);
 
