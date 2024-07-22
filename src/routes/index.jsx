@@ -9,6 +9,7 @@ import DashboardPengelola from "../pages/pengelola/DashboardPengelola";
 import ProtectedRoute from "./ProtectedRoute";
 import Chats from "../pages/admin/Chats";
 import Pakar from "../pages/admin/Pakar";
+import Tenant from "../pages/admin/Tenant";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Pakar />,
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "dashboard-admin/tenant",
+    element: (
+      <ProtectedRoute>
+        <Tenant />,
       </ProtectedRoute>
     ),
   },

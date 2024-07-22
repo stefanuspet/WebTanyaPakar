@@ -158,7 +158,7 @@ const Materi = () => {
                       onClick={() => handleDelete(item.id, item.file)}
                       className="bg-danger p-2 text-white rounded-md"
                     >
-                      Delete
+                      Hapus
                     </button>
                   </td>
                 </tr>
