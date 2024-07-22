@@ -18,7 +18,7 @@ const Users = () => {
   }, []);
   return (
     <DashboardLayout>
-      <h1 className="text-2xl font-bold text-quaternary">Users</h1>
+      <h1 className="text-2xl font-bold text-quaternary">Pengguna</h1>
       <div className="p-5">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

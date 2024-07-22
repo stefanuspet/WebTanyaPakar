@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Header from "../components/Header";
+import PengelolaSidebar from "../components/Sidebar/PengelolaSidebar";
+import HeaderPengelola from "../components/Header/HeaderPengelola";
 import { useNavigate } from "react-router-dom";
 
-// eslint-disable-next-line react/prop-types
-const DashboardLayout = ({ children }) => {
+const DashboardLayoutPengelola = ({ children }) => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const role = localStorage.getItem("role");
-    if (role !== "admin") {
+    if (role !== "pengelola") {
       navigate("/");
     }
   }, []);
@@ -19,13 +18,19 @@ const DashboardLayout = ({ children }) => {
       {/* <!-- ===== Page Wrapper Start ===== --> */}
       <div className="flex h-screen overflow-hidden">
         {/* <!-- ===== Sidebar Start ===== --> */}
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <PengelolaSidebar
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+        />
         {/* <!-- ===== Sidebar End ===== --> */}
 
         {/* <!-- ===== Content Area Start ===== --> */}
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           {/* <!-- ===== Header Start ===== --> */}
-          <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+          <HeaderPengelola
+            sidebarOpen={sidebarOpen}
+            setSidebarOpen={setSidebarOpen}
+          />
           {/* <!-- ===== Header End ===== --> */}
 
           {/* <!-- ===== Main Content Start ===== --> */}
@@ -43,4 +48,4 @@ const DashboardLayout = ({ children }) => {
   );
 };
 
-export default DashboardLayout;
+export default DashboardLayoutPengelola;

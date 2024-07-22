@@ -9,7 +9,7 @@ import { PiNotebookLight } from "react-icons/pi";
 import { MdPictureAsPdf } from "react-icons/md";
 import Logo from "/src/assets/images/logo_agrikonsultasi3.png";
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+const PengelolaSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const location = useLocation();
   const { pathname } = location;
 
@@ -54,7 +54,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     }
     localStorage.setItem("sidebar-expanded", sidebarExpanded);
   }, [sidebarExpanded]);
-
   return (
     <aside
       ref={sidebar}
@@ -64,7 +63,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     >
       <div className="flex items-center justify-center gap-2  px-6 py-5.5 lg:py-6.5">
         <img src={Logo} alt="logo" width={50} />
-        <NavLink to="/dashboard-admin">
+        <NavLink to="/dashboard-pengelola">
           <h1 className="text-center text-2xl text-white font-extrabold">
             Tanya Pakar
           </h1>
@@ -113,20 +112,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   Dashboard
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink
-                  to="/dashboard-admin/chats"
+                  to="/dashboard-admin/"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes("tables") && "bg-graydark dark:bg-meta-4"
                   }`}
                 >
                   <IoChatbubbleEllipses />
-                  Percakapan
+                  Chat
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/dashboard-admin/pakar"
+                  to="/dashboard-admin/"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes("tables") && "bg-graydark dark:bg-meta-4"
                   }`}
@@ -165,7 +164,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   }`}
                 >
                   <FaUser />
-                  Pengguna
+                  User
                 </NavLink>
               </li>
               <li>
@@ -178,7 +177,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   <MdPictureAsPdf />
                   Materi PDf
                 </NavLink>
-              </li>
+              </li> */}
             </ul>
           </div>
         </nav>
@@ -187,4 +186,4 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   );
 };
 
-export default Sidebar;
+export default PengelolaSidebar;

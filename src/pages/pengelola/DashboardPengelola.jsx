@@ -1,8 +1,9 @@
-import DashboardLayout from "../../layouts/DashboardLayout";
 import React, { useEffect, useState } from "react";
+import DashboardLayoutPengelola from "../../layouts/DashboardLayoutPengelola";
 import { countConsultation } from "../../services/allrole";
 import BgCard from "../../assets/images/bgauth.png";
-const Dashboard = () => {
+
+const DashboardPengelola = () => {
   const [data, setData] = useState(0);
 
   useEffect(() => {
@@ -12,8 +13,9 @@ const Dashboard = () => {
 
     countConsultation(updateCountConsultation);
   }, []);
+
   return (
-    <DashboardLayout>
+    <DashboardLayoutPengelola>
       <h1 className="text-2xl font-bold text-quaternary">Dashboard</h1>
       <div className="py-10 grid grid-cols-2 w-full justify-items-center">
         <div className="bg-primary rounded-lg w-96 h-44 relative ">
@@ -37,8 +39,8 @@ const Dashboard = () => {
           </h1>
         </div>
       </div>
-    </DashboardLayout>
+    </DashboardLayoutPengelola>
   );
 };
 
-export default Dashboard;
+export default DashboardPengelola;

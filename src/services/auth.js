@@ -21,9 +21,11 @@ export const login = async (email, password) => {
 
   for (const doc of querySnapshot.docs) {
     if (doc.exists()) {
+      const userData = doc.data();
       localStorage.setItem("token", token);
-      localStorage.setItem("role", doc.data().role);
-      return true;
+      localStorage.setItem("role", userData.role);
+      localStorage.setItem("email", userData.email);
+      return userData;
     }
   }
 

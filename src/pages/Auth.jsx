@@ -18,11 +18,16 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await login(data.email, data.password);
+    console.log(result);
     if (!result) {
       seterror(true);
     } else {
       seterror(false);
-      navigate("/dashboard-admin");
+      if (result.role === "admin") {
+        navigate("/dashboard-admin");
+      } else if (result.role === "pengelola") {
+        navigate("/dashboard-pengelola");
+      }
     }
   };
 
@@ -32,6 +37,8 @@ const Auth = () => {
     if (token) {
       if (role === "admin") {
         navigate("/dashboard-admin");
+      } else if (role === "pengelola") {
+        navigate("/dashboard-pengelola");
       }
     }
   }, [navigate]);

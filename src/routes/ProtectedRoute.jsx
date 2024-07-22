@@ -8,9 +8,10 @@ const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) {
+    const role = localStorage.getItem("role");
+    if (!token && !role) {
       setIsAuthenticated(false);
-      navigate("/login");
+      navigate("/");
     } else {
       setIsAuthenticated(true);
     }
