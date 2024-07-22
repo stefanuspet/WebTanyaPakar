@@ -10,6 +10,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Chats from "../pages/admin/Chats";
 import Pakar from "../pages/admin/Pakar";
 import Tenant from "../pages/admin/Tenant";
+import LogTenant from "../pages/admin/LogTenant";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Tenant />,
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "dashboard-admin/logTenant",
+    element: (
+      <ProtectedRoute>
+        <LogTenant />,
       </ProtectedRoute>
     ),
   },

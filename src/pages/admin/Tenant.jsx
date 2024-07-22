@@ -205,7 +205,7 @@ const Tenant = () => {
         theme="dark"
       />
       <div className="flex justify-between pb-2">
-        <h1 className="text-2xl font-bold text-quaternary">Pakar</h1>
+        <h1 className="text-2xl font-bold text-quaternary">Tenant</h1>
         <button
           className="bg-tertiary text-white p-2 rounded-md"
           onClick={openModal}
