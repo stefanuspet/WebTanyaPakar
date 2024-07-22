@@ -7,6 +7,7 @@ import {
   getDocs,
   addDoc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import {
   ref,
@@ -22,6 +23,7 @@ const Materi = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
+  // const [idMateri, setIdMateri] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (e) => {
@@ -53,10 +55,15 @@ const Materi = () => {
         await uploadBytes(storageRef, file);
         const fileurl = await getDownloadURL(storageRef);
 
-        await addDoc(collection(db, "materi"), {
+        const docRef = await addDoc(collection(db, "materi"), {
           title: title,
           description: description,
           file: fileurl,
+        });
+
+        const id = docRef.id;
+        await updateDoc(doc(db, "materi", id), {
+          id_materi: id,
         });
 
         console.log("Materi berhasil diunggah dan disimpan");
