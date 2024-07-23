@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { db, storage } from "../../../firebaseConfig";
-import DashboardLayout from "../../layouts/DashboardLayout";
+import DashboardLayoutPengelola from "../../layouts/DashboardLayoutPengelola";
 import {
   doc,
   collection,
@@ -21,7 +21,7 @@ import {
 } from "firebase/storage";
 import { toast, ToastContainer } from "react-toastify";
 
-const LogTenant = () => {
+const LogTenantPengelola = () => {
   const [data, setData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -66,7 +66,7 @@ const LogTenant = () => {
     fetchData();
   }, []);
   return (
-    <DashboardLayout>
+    <DashboardLayoutPengelola>
       <ToastContainer
         position={window.innerWidth <= 768 ? "bottom-center" : "top-right"}
         autoClose={5000}
@@ -150,8 +150,8 @@ const LogTenant = () => {
           </table>
         </div>
       </div>
-    </DashboardLayout>
+    </DashboardLayoutPengelola>
   );
 };
 
-export default LogTenant;
+export default LogTenantPengelola;

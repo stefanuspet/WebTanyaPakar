@@ -11,6 +11,7 @@ import Chats from "../pages/admin/Chats";
 import Pakar from "../pages/admin/Pakar/";
 import Tenant from "../pages/admin/Tenant/index";
 import LogTenant from "../pages/admin/LogTenant";
+import LogTenantPengelola from "../pages/pengelola/LogTenantPengelola";
 import CreateTenant from "../pages/admin/Tenant/CreateTenant";
 import EditTenant from "../pages/admin/Tenant/EditTenant";
 import CreatePakar from "../pages/admin/Pakar/CreatePakar";
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <DashboardPengelola />,
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "dashboard-pengelola/logTenantPengelola",
+    element: (
+      <ProtectedRoute>
+        <LogTenantPengelola />,
       </ProtectedRoute>
     ),
   },

@@ -2,38 +2,42 @@ import React, { useEffect, useState } from "react";
 import DashboardLayout from "../../layouts/DashboardLayout";
 // import firebase from "firebase/app";
 // import "firebase/firestore";
-import { db } from "../../../firebaseConfig";
+import { ref, onValue } from "firebase/database";
+import { realtimeDb } from "../../../firebaseConfig";
 
 const Chats = () => {
-  const sendMessage = async (e) => {
-    e.preventDefault();
-    const messageInput = document.querySelector("input[type='text']");
-    const message = messageInput.value;
+  // const sendMessage = async (e) => {
+  //   e.preventDefault();
+  //   const messageInput = document.querySelector("input[type='text']");
+  //   const message = messageInput.value;
 
-    if (message.trim()) {
-      await db.collection("chats").add({
-        text: message,
-        sender: "me",
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      });
+  //   if (message.trim()) {
+  //     await realtimeDb.collection("chats").add({
+  //       text: message,
+  //       sender: "me",
+  //       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+  //     });
 
-      messageInput.value = "";
-    }
-  };
+  //     messageInput.value = "";
+  //   }
+  // };
 
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = db
-      .collection("chats")
-      .orderBy("timestamp")
-      .onSnapshot((snapshot) => {
-        setMessages(
-          snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-        );
-      });
+    const dbRef = ref(realtimeDb, "chats");
 
-    return () => unsubscribe();
+    onValue(dbRef, (snapshot) => {
+      const messages = [];
+      snapshot.forEach((childSnapshot) => {
+        const childData = childSnapshot.val();
+        messages.push({
+          id: childSnapshot.key,
+          ...childData,
+        });
+      });
+      setMessages(messages);
+    });
   }, []);
 
   return (
@@ -41,7 +45,7 @@ const Chats = () => {
       <div className="flex overflow-hidden border">
         <div className="w-1/5 bg-white border-r border-gray-300">
           <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-[#045A5B] text-white">
-            <h1 className="text-2xl font-semibold">Chat Web</h1>
+            <h1 className="text-2xl font-semibold">Percakapan</h1>
             <div className="relative">
               <button id="menuButton" className="focus:outline-none">
                 <svg
@@ -119,16 +123,17 @@ const Chats = () => {
 
           <div className="h-screen overflow-y-auto p-4 pb-36">
             {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${
-                  message.sender === "me" ? "justify-end" : ""
-                } mb-4 cursor-pointer`}
-              >
-                <div className="flex max-w-96 bg-[#045A5B] text-white rounded-lg p-3 gap-3">
-                  <p>{message.text}</p>
-                </div>
-              </div>
+              // <p>{message.chat}</p>
+              // <div
+              //   key={message.id}
+              //   className={`flex ${
+              //     message.sender === "me" ? "justify-end" : ""
+              //   } mb-4 cursor-pointer`}
+              // >
+              //   <div className="flex max-w-96 bg-[#045A5B] text-white rounded-lg p-3 gap-3">
+              //     <p>{message.text}</p>
+              //   </div>
+              // </div>
             ))}
           </div>
           <footer className="bg-white border-t border-gray-300 p-4 absolute bottom-0 w-3/4">
@@ -139,7 +144,7 @@ const Chats = () => {
                 className="w-full p-2 rounded-md border border-gray-400 focus:outline-none focus:border-[#045A5B]"
               />
               <button
-                onClick={sendMessage}
+                // onClick={sendMessage}
                 className="bg-[#045A5B] text-white px-4 py-2 rounded-md ml-2"
               >
                 Send
