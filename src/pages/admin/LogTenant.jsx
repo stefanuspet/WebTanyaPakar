@@ -30,11 +30,11 @@ const LogTenant = () => {
 
   const handleDelete = async (id) => {
     try {
-      const tenant = doc(db, "tenant", id);
-      await deleteDoc(tenant);
+      const log_tenant = doc(db, "log_tenant", id);
+      await deleteDoc(log_tenant);
 
       setData(data.filter((item) => item.id !== id));
-      console.log("Data Tenant berhasil dihapus");
+      console.log("Data Log Tenant berhasil dihapus");
     } catch (error) {
       console.log("error", error);
     }
@@ -42,7 +42,7 @@ const LogTenant = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, "tenant"));
+      const querySnapshot = await getDocs(collection(db, "log_tenant"));
       const tempData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -72,37 +72,19 @@ const LogTenant = () => {
             <thead className="text-xs text-gray-700 uppercase bg-slate-300 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
-                  Nama
+                  Deskripsi
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Tipe Bisnis
+                  Nama File
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Email
+                  ID Log
                 </th>
                 <th scope="col" className="px-6 py-3">
                   ID Tenant
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Pendapatan
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Alamat
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Nama Tenant
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  No. Telp
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Masalah
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Produksi
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Status
+                  ID User
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Aksi
@@ -119,18 +101,21 @@ const LogTenant = () => {
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                   >
-                    {item.name}
+                    {item.description}
                   </th>
-                  <td className="px-6 py-4">{item.business_type}</td>
-                  <td className="px-6 py-4">{item.email}</td>
+                  <td className="px-6 py-4">
+                    <a
+                      href={item.file}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline"
+                    >
+                      {item.file_name}
+                    </a>
+                  </td>
                   <td className="px-6 py-4">{item.id}</td>
-                  <td className="px-6 py-4">Rp {item.income}</td>
-                  <td className="px-6 py-4">{item.address}</td>
-                  <td className="px-6 py-4">{item.name_tenant}</td>
-                  <td className="px-6 py-4">{item.phone}</td>
-                  <td className="px-6 py-4">{item.problems}</td>
-                  <td className="px-6 py-4">{item.production}</td>
-                  <td className="px-6 py-4">{item.status}</td>
+                  <td className="px-6 py-4">{item.id_tenant}</td>
+                  <td className="px-6 py-4">{item.id_user}</td>
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
                       <button
