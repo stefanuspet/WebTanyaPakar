@@ -1,71 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardLayout from "../../../layouts/DashboardLayout";
-import { ToastContainer, toast } from "react-toastify";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../../../../firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
 import { NavLink } from "react-router-dom";
 
-const Tenant = () => {
-  const [data, setData] = useState([]);
+const Pakar = () => {
+  const [pakar, setPakar] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const querySnapshot = await getDocs(collection(db, "tenant"));
+      const querySnapshot = await getDocs(collection(db, "pakar"));
       const tempData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      setData(tempData);
+      setPakar(tempData);
     };
     fetchData();
   }, []);
-
-  const handleDelete = async (id) => {
-    try {
-      await deleteDoc(doc(db, "tenant", id));
-      setData(data.filter((item) => item.id !== id));
-      toast.success("Data Tenant berhasil dihapus!", {
-        position: window.innerWidth <= 768 ? "bottom-center" : "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    } catch (error) {
-      toast.error("Gagal menghapus data Tenant.", {
-        position: window.innerWidth <= 768 ? "bottom-center" : "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    }
-  };
-
   return (
     <DashboardLayout>
-      <ToastContainer
-        position={window.innerWidth <= 768 ? "bottom-center" : "top-right"}
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
       <div className="flex justify-between pb-2">
-        <h1 className="text-2xl font-bold text-quaternary">Tenant</h1>
+        <h1 className="text-2xl font-bold text-quaternary">Pakar</h1>
         <NavLink
-          to="/dashboard-admin/tenant/create"
+          to="/dashboard-admin/pakar/create"
           className="bg-tertiary text-white p-2 rounded-md"
         >
           Tambah
@@ -80,34 +38,49 @@ const Tenant = () => {
                   Nama
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Tipe Bisnis
+                  Tempat, Tanggal Lahir
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Email
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  ID Tenant
+                  Status
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Pendapatan
+                  Jenis Kelamin
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Alamat
+                  ID Pakar
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Nama Tenant
+                  Jabatan Fungsional
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Jabatan Struktural
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Pendidikan Terakhir
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  NIP
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  NIP Lama
                 </th>
                 <th scope="col" className="px-6 py-3">
                   No. Telp
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Masalah
+                  Agama
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Produksi
+                  TMT Fungsional
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Status
+                  TMT Struktural
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Universitas
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Aksi
@@ -115,7 +88,7 @@ const Tenant = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item) => (
+              {pakar.map((item) => (
                 <tr
                   key={item.id}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
@@ -126,32 +99,39 @@ const Tenant = () => {
                   >
                     {item.name}
                   </th>
-                  <td className="px-6 py-4">{item.business_type}</td>
-                  <td className="px-6 py-4">{item.email}</td>
-                  <td className="px-6 py-4">{item.id}</td>
-                  <td className="px-6 py-4">Rp {item.income}</td>
-                  <td className="px-6 py-4">{item.address}</td>
-                  <td className="px-6 py-4">{item.name_tenant}</td>
-                  <td className="px-6 py-4">{item.phone}</td>
-                  <td className="px-6 py-4">{item.problems}</td>
-                  <td className="px-6 py-4">{item.production}</td>
-                  <td className="px-6 py-4">
-                    {item.status === "active" ? "Aktif" : "Tidak Aktif"}
+                  <td scope="row" className="px-6 py-4">
+                    {item.birth_place}, {item.birth_date}
                   </td>
+                  <td className="px-6 py-4">{item.email}</td>
+                  <td className="px-6 py-4">{item.family_status}</td>
+                  <td className="px-6 py-4">
+                    {item.gender === "male" ? "Laki-laki" : "Perempuan"}
+                  </td>
+                  <td className="px-6 py-4">{item.id}</td>
+                  <td className="px-6 py-4">{item.jabatan_fungsional}</td>
+                  <td className="px-6 py-4">{item.jabatan_struktural}</td>
+                  <td className="px-6 py-4">{item.last_education}</td>
+                  <td className="px-6 py-4">{item.nip}</td>
+                  <td className="px-6 py-4">{item.old_nip}</td>
+                  <td className="px-6 py-4">{item.phone}</td>
+                  <td className="px-6 py-4">{item.religion}</td>
+                  <td className="px-6 py-4">{item.tmt_fungsional}</td>
+                  <td className="px-6 py-4">{item.tmt_struktural}</td>
+                  <td className="px-6 py-4">{item.university}</td>
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
                       <button
-                        onClick={() => handleDelete(item.id)}
+                        onClick={() => handleDelete(item.id, item.profile_img)}
                         className="bg-danger p-2 text-white rounded-md"
                       >
                         Hapus
                       </button>
-                      <NavLink
-                        to={`/dashboard-admin/tenant/edit/${item.id}`}
-                        className="bg-blue-600 p-2 text-white rounded-md text-center"
+                      <button
+                        onClick={() => handleEdit(item.id)}
+                        className="bg-blue-600 p-2 text-white rounded-md"
                       >
                         Ubah
-                      </NavLink>
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -164,4 +144,4 @@ const Tenant = () => {
   );
 };
 
-export default Tenant;
+export default Pakar;

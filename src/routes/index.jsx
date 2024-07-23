@@ -8,11 +8,12 @@ import Materi from "../pages/admin/Materi";
 import DashboardPengelola from "../pages/pengelola/DashboardPengelola";
 import ProtectedRoute from "./ProtectedRoute";
 import Chats from "../pages/admin/Chats";
-import Pakar from "../pages/admin/Pakar";
+import Pakar from "../pages/admin/Pakar/";
 import Tenant from "../pages/admin/Tenant/index";
 import LogTenant from "../pages/admin/LogTenant";
 import CreateTenant from "../pages/admin/Tenant/CreateTenant";
-import EditTenant from "../pages/admin/Tenant/Edit";
+import EditTenant from "../pages/admin/Tenant/EditTenant";
+import CreatePakar from "../pages/admin/Pakar/CreatePakar";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Pakar />,
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "dashboard-admin/pakar/create",
+    element: (
+      <ProtectedRoute>
+        <CreatePakar />
       </ProtectedRoute>
     ),
   },
