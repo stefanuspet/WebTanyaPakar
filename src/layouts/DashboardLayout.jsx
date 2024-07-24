@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Sidebar from "../components/Sidebar";
-import Header from "../components/Header";
+import Sidebar from "../components/Sidebar/AdminSidebar";
+import Header from "../components/Header/HeaderAdmin";
 import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types

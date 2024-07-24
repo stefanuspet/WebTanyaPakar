@@ -3,6 +3,7 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 // import firebase from "firebase/app";
 // import "firebase/firestore";
 import { ref, onValue } from "firebase/database";
+import { ImSpinner } from "react-icons/im";
 import { realtimeDb } from "../../../firebaseConfig";
 
 const Chats = () => {
@@ -42,8 +43,18 @@ const Chats = () => {
 
   return (
     <DashboardLayout>
-      <div className="flex overflow-hidden border">
-        <div className="w-1/5 bg-white border-r border-gray-300">
+      <div className="flex overflow-hidden border relative h-72">
+        <div className="absolute inset-0 bg-slate-300 z-998">
+          <div className="w-full h-full flex justify-center items-center">
+            {/* <svg
+              className="animate-spin h-5 w-5 mr-3 "
+              viewBox="0 0 24 24"
+            ></svg> */}
+            <ImSpinner className="animate-spin h-10 w-10 mr-3 " />
+            <h1 className="text-3xl">This feature is under development</h1>
+          </div>
+        </div>
+        {/* <div className="w-1/5 bg-white border-r border-gray-300">
           <header className="p-4 border-b border-gray-300 flex justify-between items-center bg-[#045A5B] text-white">
             <h1 className="text-2xl font-semibold">Percakapan</h1>
             <div className="relative">
@@ -114,29 +125,15 @@ const Chats = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="flex-1">
+        {/* <div className="flex-1">
           <header className="bg-white p-4 text-gray-700">
             <h1 className="text-2xl font-semibold">Alice</h1>
           </header>
 
-          <div className="h-screen overflow-y-auto p-4 pb-36">
-            {messages.map((message) => (
-              // <p>{message.chat}</p>
-              // <div
-              //   key={message.id}
-              //   className={`flex ${
-              //     message.sender === "me" ? "justify-end" : ""
-              //   } mb-4 cursor-pointer`}
-              // >
-              //   <div className="flex max-w-96 bg-[#045A5B] text-white rounded-lg p-3 gap-3">
-              //     <p>{message.text}</p>
-              //   </div>
-              // </div>
-            ))}
-          </div>
-          <footer className="bg-white border-t border-gray-300 p-4 absolute bottom-0 w-3/4">
+          <div className="h-screen overflow-y-auto p-4 pb-36"></div> */}
+        {/* <footer className="bg-white border-t border-gray-300 p-4 absolute z-0 bottom-0 w-3/4">
             <div className="flex items-center">
               <input
                 type="text"
@@ -150,8 +147,8 @@ const Chats = () => {
                 Send
               </button>
             </div>
-          </footer>
-        </div>
+          </footer> */}
+        {/* </div> */}
       </div>
     </DashboardLayout>
   );
