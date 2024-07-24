@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import DashboardLayout from "../../../layouts/DashboardLayout";
-import { db } from "../../../../firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
-import { NavLink } from "react-router-dom";
+import { db, storage } from "../../../../firebaseConfig";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { Link, NavLink } from "react-router-dom";
+import { ref, deleteObject } from "firebase/storage";
+import { ToastContainer, toast } from "react-toastify";
 
 const Pakar = () => {
   const [pakar, setPakar] = useState([]);
@@ -18,8 +20,47 @@ const Pakar = () => {
     };
     fetchData();
   }, []);
+
+  const handleDelete = async (id, profile_img) => {
+    try {
+      if (profile_img) {
+        const fileref = ref(storage, profile_img);
+        await deleteObject(fileref);
+      }
+
+      const data = doc(db, "pakar", id);
+      await deleteDoc(data);
+
+      setPakar(pakar.filter((item) => item.id !== id));
+      console.log("Document successfully deleted!");
+      toast.success("Data Pakar Berhasil Dihapus !", {
+        position: window.innerWidth <= 768 ? "bottom-center" : "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <DashboardLayout>
+      <ToastContainer
+        position={window.innerWidth <= 768 ? "bottom-center" : "top-right"}
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="flex justify-between pb-2">
         <h1 className="text-2xl font-bold text-quaternary">Pakar</h1>
         <NavLink
@@ -126,12 +167,12 @@ const Pakar = () => {
                       >
                         Hapus
                       </button>
-                      <button
-                        onClick={() => handleEdit(item.id)}
+                      <Link
+                        to={`/dashboard-admin/pakar/edit/${item.id}`}
                         className="bg-blue-600 p-2 text-white rounded-md"
                       >
                         Ubah
-                      </button>
+                      </Link>
                     </div>
                   </td>
                 </tr>
