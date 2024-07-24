@@ -14,6 +14,7 @@ import LogTenant from "../pages/admin/LogTenant";
 import CreateTenant from "../pages/admin/Tenant/CreateTenant";
 import EditTenant from "../pages/admin/Tenant/EditTenant";
 import CreatePakar from "../pages/admin/Pakar/CreatePakar";
+import EditPakar from "../pages/admin/Pakar/EditPakar";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <CreatePakar />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "dashboard-admin/pakar/edit/:id",
+    element: (
+      <ProtectedRoute>
+        <EditPakar />
       </ProtectedRoute>
     ),
   },

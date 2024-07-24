@@ -40,6 +40,16 @@ const Materi = () => {
 
       setData(data.filter((item) => item.id !== id));
       console.log("Materi berhasil dihapus");
+      toast.success("Materi Berhasil DiHapus!", {
+        position: window.innerWidth <= 768 ? "bottom-center" : "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     } catch (error) {
       console.log("error", error);
     }
@@ -51,18 +61,25 @@ const Materi = () => {
 
     if (file) {
       try {
-        const storageRef = ref(storage, `materi/${file.name}`);
-        await uploadBytes(storageRef, file);
-        const fileurl = await getDownloadURL(storageRef);
-
+        // 1. Tambahkan dokumen ke Firestore terlebih dahulu
         const docRef = await addDoc(collection(db, "materi"), {
           title: title,
           description: description,
-          file: fileurl,
         });
 
+        // Ambil ID dokumen dari Firestore
         const id = docRef.id;
+
+        // 2. Gunakan ID untuk nama file di Firebase Storage
+        const storageRef = ref(storage, `materi/${id}`);
+        await uploadBytes(storageRef, file);
+
+        // Dapatkan URL file
+        const fileurl = await getDownloadURL(storageRef);
+
+        // 3. Perbarui dokumen dengan URL file dan ID materi
         await updateDoc(doc(db, "materi", id), {
+          file: fileurl,
           id_materi: id,
         });
 
