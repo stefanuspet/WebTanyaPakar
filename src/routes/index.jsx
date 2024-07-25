@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     path: "/dashboard-pengelola",
     element: (
       <ProtectedRoute>
-        <DashboardPengelola />,
+        <DashboardPengelola />
       </ProtectedRoute>
     ),
   },
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
     path: "dashboard-pengelola/logTenantPengelola",
     element: (
       <ProtectedRoute>
-        <LogTenantPengelola />,
+        <LogTenantPengelola />
       </ProtectedRoute>
     ),
   },
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
     path: "dashboard-admin/users",
     element: (
       <ProtectedRoute>
-        <Users />,
+        <Users />
       </ProtectedRoute>
     ),
   },
@@ -62,7 +62,7 @@ const router = createBrowserRouter([
     path: "dashboard-admin/materi",
     element: (
       <ProtectedRoute>
-        <Materi />,
+        <Materi />
       </ProtectedRoute>
     ),
   },
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
     path: "dashboard-admin/chats",
     element: (
       <ProtectedRoute>
-        <Chats />,
+        <Chats />
       </ProtectedRoute>
     ),
   },
@@ -78,7 +78,7 @@ const router = createBrowserRouter([
     path: "dashboard-admin/pakar",
     element: (
       <ProtectedRoute>
-        <Pakar />,
+        <Pakar />
       </ProtectedRoute>
     ),
   },
@@ -102,7 +102,7 @@ const router = createBrowserRouter([
     path: "dashboard-admin/tenant",
     element: (
       <ProtectedRoute>
-        <Tenant />,
+        <Tenant />
       </ProtectedRoute>
     ),
   },
@@ -126,7 +126,7 @@ const router = createBrowserRouter([
     path: "dashboard-admin/logTenant",
     element: (
       <ProtectedRoute>
-        <LogTenant />,
+        <LogTenant />
       </ProtectedRoute>
     ),
   },
