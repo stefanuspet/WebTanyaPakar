@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import DashboardLayout from "../../layouts/DashboardLayout";
-import { ref, onValue, push, set, update } from "firebase/database";
+import { ref, onValue, push, update, get } from "firebase/database";
 import { realtimeDb, db } from "../../../firebaseConfig";
 import SidebarChat from "../../components/Chats/SidebarChat";
 import BubbleChatLeft from "../../components/Chats/BubbleChatLeft";
@@ -21,6 +21,8 @@ const Chats = () => {
     pakar: "",
     tenant: "",
   });
+  const [chatStatus, setChatStatus] = useState(""); // Add state for chat status
+  const [lastUnrepliedMessageId, setLastUnrepliedMessageId] = useState(null); // Add state for last unreplied message
 
   const fetchUser = async (id, role) => {
     const docRef = doc(db, "user", id);
@@ -41,8 +43,6 @@ const Chats = () => {
     fetchUser(tenantID, "tenant");
   }, [pakarID, tenantID]);
 
-  console.log(user);
-
   useEffect(() => {
     const dbRef = ref(realtimeDb, `chatMessages/${chatID}`);
     onValue(dbRef, (snapshot) => {
@@ -57,8 +57,28 @@ const Chats = () => {
       // Urutkan pesan berdasarkan timestamp
       messages.sort((a, b) => a.timestamp - b.timestamp);
       setMessages(messages);
+
+      // Determine the last message sent by the tenant that hasn't been replied to by the pakar
+      let lastUnrepliedId = null;
+      for (let i = messages.length - 1; i >= 0; i--) {
+        if (messages[i].sentBy === tenantID) {
+          lastUnrepliedId = messages[i].id;
+          break;
+        } else if (messages[i].sentBy === pakarID) {
+          break;
+        }
+      }
+      setLastUnrepliedMessageId(lastUnrepliedId);
     });
-  }, [chatID]);
+
+    // Fetch the chat status
+    const chatRef = ref(realtimeDb, `chats/${chatID}`);
+    get(chatRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        setChatStatus(snapshot.val().chatStatus);
+      }
+    });
+  }, [chatID, pakarID, tenantID]);
 
   useEffect(() => {
     // Auto scroll ke bawah ketika pesan diperbarui
@@ -92,12 +112,15 @@ const Chats = () => {
   };
 
   const handleOnSubmit = (e) => {
-    sendMessage(send);
     e.preventDefault();
+    if (chatStatus === "done") {
+      alert("Cannot send message, the chat is marked as done.");
+      return;
+    }
+    sendMessage(send);
     e.target.reset();
   };
 
-  console.log(send);
   return (
     <DashboardLayout>
       <div className="w-full min-h-[calc(100vh-172px)]  rounded-md border flex flex-col">
@@ -124,6 +147,7 @@ const Chats = () => {
                             name={user.tenant}
                             message={item.message}
                             time={new Date(item.timestamp).toLocaleString()}
+                            highlight={item.id === lastUnrepliedMessageId} // Highlight the last unreplied message
                           />
                         )}
                       </div>
@@ -148,11 +172,13 @@ const Chats = () => {
                         className="block w-full rounded-lg border border-gray-600 bg-gray-700 p-2.5  ps-10 text-sm text-slate-500 placeholder-gray-400 outline-none"
                         placeholder="Send Your Message"
                         required
+                        disabled={chatStatus === "done"} // Disable input when chat status is "done"
                       />
                     </div>
                     <button
                       type="submit"
                       className="ms-2 rounded-lg border border-blue-700 bg-blue-700 p-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      disabled={chatStatus === "done"} // Disable button when chat status is "done"
                     >
                       <IoMdSend className="text-xl text-white" />
                     </button>
