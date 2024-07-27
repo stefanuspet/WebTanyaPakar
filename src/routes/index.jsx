@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Auth from "../pages/Auth";
 import ErrorPage from "../pages/ErrorPage";
-// import ProtectedRoute from "./ProtectedRoute";
 import Dashboard from "../pages/admin/Dashboard";
 import Users from "../pages/admin/Users";
 import Materi from "../pages/admin/Materi";
@@ -63,6 +62,14 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Materi />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "dashboard-admin/chats/:chatID/:pakarID/:tenantID",
+    element: (
+      <ProtectedRoute>
+        <Chats />
       </ProtectedRoute>
     ),
   },
