@@ -684,7 +684,7 @@ const CreatePakar = () => {
               htmlFor=""
               className="block mb-2 text-sm font-medium text-gray-900 "
             >
-              Nama Expertise <span className="text-danger">*</span>
+              Spesifikasi <span className="text-danger">*</span>
             </label>
             <div className="grid grid-cols-2 items-center mb-4">
               {expertiseOptions.map((exp) => (

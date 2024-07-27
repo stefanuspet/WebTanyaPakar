@@ -71,7 +71,7 @@ const Materi = () => {
         const id = docRef.id;
 
         // 2. Gunakan ID untuk nama file di Firebase Storage
-        const storageRef = ref(storage, `materi/${id}`);
+        const storageRef = ref(storage, `materi/${id}/${file.name}`);
         await uploadBytes(storageRef, file);
 
         // Dapatkan URL file
