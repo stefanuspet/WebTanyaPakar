@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ref, get } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { realtimeDb } from "../../../firebaseConfig";
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
@@ -9,20 +9,6 @@ import { Link } from "react-router-dom";
 const SidebarChat = () => {
   const [chatRooms, setChatRooms] = useState([]);
   const [userNames, setUserNames] = useState({});
-
-  const fetchChatRooms = async () => {
-    const dbRef = ref(realtimeDb, "chats");
-    const snapshot = await get(dbRef);
-    const chats = [];
-    snapshot.forEach((childSnapshot) => {
-      const childData = childSnapshot.val();
-      chats.push({
-        id: childSnapshot.key,
-        ...childData,
-      });
-    });
-    return chats;
-  };
 
   const fetchUserData = async (userIds) => {
     const db = getFirestore();
@@ -41,8 +27,17 @@ const SidebarChat = () => {
   };
 
   useEffect(() => {
-    const loadData = async () => {
-      const chats = await fetchChatRooms();
+    const dbRef = ref(realtimeDb, "chats");
+
+    const handleValueChange = async (snapshot) => {
+      const chats = [];
+      snapshot.forEach((childSnapshot) => {
+        const childData = childSnapshot.val();
+        chats.push({
+          id: childSnapshot.key,
+          ...childData,
+        });
+      });
 
       // Menyortir chat rooms sehingga ongoing muncul sebelum done
       const sortedChats = chats.sort((a, b) => {
@@ -63,7 +58,10 @@ const SidebarChat = () => {
       setUserNames(users);
     };
 
-    loadData();
+    const unsubscribe = onValue(dbRef, handleValueChange);
+
+    // Cleanup listener on unmount
+    return () => unsubscribe();
   }, []);
 
   return (
