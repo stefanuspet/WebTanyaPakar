@@ -1,6 +1,6 @@
 # Tanya Pakar
 
-This project is built with React and Vite. It includes various features to manage and interact with Pakar data, user roles, PDF materials, ratings, and a chat system.
+This project is built with React and Vite, and utilizes Firebase for its backend services. It includes various features to manage Pakar and tenant data, user roles, PDF materials, consultation completions, tenant logs, and a chat system.
 
 ## Features
 
