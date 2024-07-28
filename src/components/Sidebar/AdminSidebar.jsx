@@ -66,7 +66,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         <img src={Logo} alt="logo" width={50} />
         <NavLink to="/dashboard-admin">
           <h1 className="text-center text-2xl text-white font-extrabold">
-            Tanya Pakar
+            AgriKonsultasi
           </h1>
         </NavLink>
 

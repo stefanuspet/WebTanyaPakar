@@ -2,20 +2,39 @@
 
 This project is built with React and Vite. It includes various features to manage and interact with Pakar data, user roles, PDF materials, ratings, and a chat system.
 
-## Planned Features
+## Features
 
-- **Authentication**: Users can authenticate using their phone number with OTP.
-- **User Data Display**: Display user data with their role status (Pakar or tenant).
-- **Pakar Data Management**:
-  - **Input**: Add new Pakar data.
-  - **Edit** : Modify existing Pakar data.
-  - **Delete**: Remove Pakar data.
+- **Auth (email pass)**: Users can authenticate using their email and password.
+- **CRUD Data Pakar dan Tenant**:
+  - **Create**: Add new Pakar and tenant data.
+  - **Read**: View Pakar and tenant data.
+  - **Update**: Modify existing Pakar and tenant data.
+  - **Delete**: Remove Pakar and tenant data.
+- **Read Data User**: Display user data with their role status (Pakar, tenant, admin, or pengelola).
 - **PDF Material Management**:
-  - **Input**: Add new PDF materials with categories.
+  - **Input**: Add new PDF materials.
   - **Delete**: Remove PDF materials.
   - **Display**: Show a list of PDF titles (the PDFs themselves are not displayed).
-- **Average Rating Display**: Show the average rating of Pakar answers.
-- **Chat Feature**: Admin can access and manage chats with Pakar.
+- **Consultation Completion Display**: Show the number of completed consultations (input from Google Form evaluation).
+- **Tenant Log Management**:
+  - **Read**: View tenant logs (sorted by timestamp DESC).
+  - **Delete**: Remove tenant logs.
+- **Chat Feature**: Admin can see and reply to chats as Pakar.
+
+## Environment Requirements
+
+- **Node.js**: Ensure you have Node.js installed (version 20 or higher is recommended).
+- **npm**: npm is required to install dependencies.
+
+## Built With
+
+- **Vite**: A fast build tool and development server for modern web projects.
+- **React**: A JavaScript library for building user interfaces.
+- **Firebase**: A platform developed by Google for creating mobile and web applications, used here for database and hosting.
+
+## Deployment
+
+The project is deployed and can be accessed at [Tanya Pakar](https://tanyapakar-c08ad.web.app/).
 
 ## Getting Started
 ### Installation

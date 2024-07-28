@@ -53,8 +53,8 @@ const DashboardPengelola = () => {
             alt=""
             className="absolute z-0 w-full h-full object-cover rounded-lg"
           />
-          <h1 className="text-xl font-bold text-white absolute inset-0 flex items-center justify-center z-10">
-            Jumlah Konsultasi : {data}
+          <h1 className="text-xl px-5 text-center font-bold text-white absolute inset-0 flex items-center justify-center z-10 text-wrap">
+            Jumlah Konsultasi Selesai : {data}
           </h1>
         </div>
         <div className="bg-primary rounded-lg w-full h-44 relative">
@@ -63,7 +63,7 @@ const DashboardPengelola = () => {
             alt=""
             className="absolute z-0 w-full h-full object-cover rounded-lg"
           />
-          <h1 className="text-xl font-bold text-white absolute inset-0 flex items-center justify-center z-10">
+          <h1 className="text-xl px-5 text-center font-bold text-white absolute inset-0 flex items-center justify-center z-10 text-wrap">
             Jumlah Pengguna : {user}
           </h1>
         </div>
@@ -73,7 +73,7 @@ const DashboardPengelola = () => {
             alt=""
             className="absolute z-0 w-full h-full object-cover rounded-lg"
           />
-          <h1 className="text-xl font-bold text-white absolute inset-0 flex items-center justify-center z-10">
+          <h1 className="text-xl px-5 text-center font-bold text-white absolute inset-0 flex items-center justify-center z-10 text-wrap">
             Jumlah Pakar : {pakar}
           </h1>
         </div>
@@ -83,7 +83,7 @@ const DashboardPengelola = () => {
             alt=""
             className="absolute z-0 w-full h-full object-cover rounded-lg"
           />
-          <h1 className="text-xl font-bold text-white absolute inset-0 flex items-center justify-center z-10">
+          <h1 className="text-xl px-5 text-center font-bold text-white absolute inset-0 flex items-center justify-center z-10 text-wrap">
             Jumlah Tenant : {tenant}
           </h1>
         </div>

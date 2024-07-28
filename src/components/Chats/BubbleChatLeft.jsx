@@ -15,7 +15,7 @@ const BubbleChatLeft = ({ message, time, name, highlight }) => {
           <span className="text-sm font-normal text-gray-500">{time}</span>
         </div>
         <div
-          className={`flex flex-col leading-1.5 p-4 border-gray-200 rounded-s-xl rounded-ee-xl h-fit ${
+          className={`flex flex-col leading-1.5 p-4 border-gray-200 rounded-es-xl rounded-ee-xl rounded-se-xl  h-fit ${
             highlight ? "bg-yellow-200" : "bg-tertiary"
           }`}
         >

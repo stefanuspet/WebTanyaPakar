@@ -31,6 +31,9 @@ const Users = () => {
                   Email
                 </th>
                 <th scope="col" className="px-6 py-3">
+                  Telepon
+                </th>
+                <th scope="col" className="px-6 py-3">
                   role
                 </th>
               </tr>
@@ -49,6 +52,9 @@ const Users = () => {
                   </th>
                   <td scope="row" className="px-6 py-4">
                     {item.email}
+                  </td>
+                  <td scope="row" className="px-6 py-4">
+                    {item.phone}
                   </td>
                   <td className="px-6 py-4">{item.role}</td>
                 </tr>

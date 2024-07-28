@@ -86,6 +86,9 @@ const LogTenantPengelola = () => {
             <thead className="text-xs text-gray-700 uppercase bg-slate-300 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" className="px-6 py-3">
+                  Nama Tenant
+                </th>
+                <th scope="col" className="px-6 py-3">
                   Nama File
                 </th>
                 <th scope="col" className="px-6 py-3">
@@ -114,7 +117,8 @@ const LogTenantPengelola = () => {
                   key={item.id}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                 >
-                  <th
+                  <td className="px-6 py-4">{item.tenant_name}</td>
+                  <td
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                   >
@@ -126,7 +130,7 @@ const LogTenantPengelola = () => {
                     >
                       {item.file_name}
                     </a>
-                  </th>
+                  </td>
                   <td className="px-6 py-4">{item.description}</td>
                   <td className="px-6 py-4">{item.id}</td>
                   <td className="px-6 py-4">{item.id_tenant}</td>
